@@ -21,7 +21,7 @@ async function fetchWithTimeout(url: string, ms = 3000) {
 
 app.post("/get_final_urls", async (c) => {
     const urls: string[] = await c.req.json();
-    const results = (await Promise.all(urls.map(u => fetchWithTimeout(u, 3000)))).map(url=>url != "");
+    const results = (await Promise.all(urls.map(u => fetchWithTimeout(u, 3000)))).filter(url=>url != "");
     return c.json(results);
 });
 
